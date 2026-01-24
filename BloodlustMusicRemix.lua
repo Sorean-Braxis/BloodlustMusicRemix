@@ -301,16 +301,13 @@ function f:OnEvent(event, unit, updateInfo)
 		-- Check all bloodlust/heroism spell IDs
 		for key, spellID in pairs(spellIDS) do
 			local auraData = C_UnitAuras.GetPlayerAuraBySpellID(spellID)
-			
 			-- If buff is found and no song is currently playing for this spell
 			if auraData and BloodlustMusicRemix.currentSongSpellID ~= spellID then
-				print("Bloodlust/Heroism detected! SpellID:", spellID) -- DEBUG
 				-- Play the song
 				SongPlayerPrimer(spellID, 0, 0);
 				break
 			-- If buff is not found but we were playing a song for this spell
 			elseif not auraData and BloodlustMusicRemix.currentSongSpellID == spellID then
-				print("Bloodlust/Heroism removed! SpellID:", spellID) -- DEBUG
 				-- Stop the song
 				StopSong(true);
 				break
@@ -320,7 +317,6 @@ function f:OnEvent(event, unit, updateInfo)
 end
 f:SetScript("OnEvent", f.OnEvent);
 f:RegisterUnitEvent("UNIT_AURA", "player");
-print("BloodlustMusicRemix: UNIT_AURA registered for player")
 
 
 --Main/Options Panel
